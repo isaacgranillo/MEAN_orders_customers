@@ -1,0 +1,58 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<div ng-controller='OrdersController as ordersCtrl'>
+
+		<h2>Add a new order</h2>
+
+		<form>
+			Customer: 	<select ng-model='ordersCtrl.newOrder.name'>
+							<option ng-repeat='customer in ordersCtrl.customers'>{{customer.name}}</option>
+						</select>
+			Order: 		<select ng-model='ordersCtrl.newOrder.quantity'>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+						</select>
+
+						<select ng-model='ordersCtrl.newOrder.product'>
+							<option>Shoes</option>
+							<option>Belts</option>
+							<option>Hats</option>
+							<option>Shirts</option>
+						</select>	
+						<input type='submit' value='Order' ng-click='ordersCtrl.addOrder(ordersCtrl.newOrder)'>
+		</form>
+		<input type='text' placeholder='Filter...' ng-model='filter_order'>
+
+		<table border = '1 px'>
+			<tr>
+				<th>Customer Name</th>
+				<th>Product</th>
+				<th>Quantity</th>
+				<th>Date</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat='order in ordersCtrl.orders | filter:filter_order | orderBy: "name"'>
+				<td><span ng-bind='order.name'></span></td>
+				<td><span ng-bind='order.product'></span></td>
+				<td><span ng-bind='order.quantity'></span></td>
+				<td><span ng-bind='order.created | date: "longDate"'></span></td>
+				<td><button ng-click='ordersCtrl.removeOrder(order._id)'>Remove</button></td>
+			</tr>
+		</table>
+ 
+	</div>
+
+</body>
+</html>
